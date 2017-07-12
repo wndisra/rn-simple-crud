@@ -16,9 +16,10 @@ const PostDetail = (props) => {
       </CardSection>
 
       <CardSection>
-        <Button onPress={() => console.log('Show Pressed')} text={'Show'} />
-        <Button onPress={() => console.log('Edit Pressed')} text={'Edit'} />
-        <Button onPress={() => console.log('Delete Pressed')} text={'Delete'} />
+        <Button
+          onPress={() => console.log('Show Pressed')}
+          text={'Show'}
+        />
       </CardSection>
     </Card>
   );
