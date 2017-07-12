@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import axios from 'axios';
 import Input from './Input';
 import Card from './Card';
@@ -7,7 +7,7 @@ import CardSection from './CardSection';
 import Button from './Button';
 
 class CreateForm extends Component {
-  state = { title: '', body: '', error: '' };
+  state = { title: '', body: '' };
 
   onButtonPress() {
     const { title, body } = this.state;
@@ -18,27 +18,31 @@ class CreateForm extends Component {
       userId: 1
     };
 
-    axios.post('http://jsonplaceholder.typicode.com/posts', data)
-      .then(response => this.onAxiosSuccess(response, data))
-      .catch(error => this.onAxiosFail(error));
-  }
+    axios.post('https://jsonplaceholder.typicode.com/posts', data)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
 
-  onAxiosSuccess(response, data) {
-    if (JSON.stringify(response) === JSON.stringify(data)) {
-      Alert.alert('Succeed', 'Fake post created', [{
-        text: 'OK', onPress: () => console.log('OK Pressed')
-      }], { cancelable: false });
+    if (this.checkInput(title, body)) {
+      this.renderAlert('Succeed', 'Fake post created');
     } else {
-      this.onAxiosFail();
+      this.renderAlert('Failed', 'Fake post not created');
     }
   }
 
-  onAxiosFail(error) {
-    if (error) {
-      Alert.alert('Failed', 'Fake post not created', [{
-        text: 'OK', onPress: () => console.log('OK Pressed')
-      }], { cancelable: false });
+  checkInput(title, body) {
+    let successInput = false;
+
+    if (title !== '' && body !== '') {
+      successInput = true;
     }
+
+    return successInput;
+  }
+
+  renderAlert(text, message) {
+    Alert.alert(text, message, [{
+      text: 'OK',
+    }], { cancelable: false });
   }
 
   render() {
@@ -61,10 +65,6 @@ class CreateForm extends Component {
             onChangeText={body => this.setState({ body })}
           />
         </CardSection>
-
-        <Text>
-          {this.state.error}
-        </Text>
 
         <CardSection>
           <Button
