@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 
-const PostDetail = (props) => {
-  return (
-    <Card>
-      <CardSection>
-        <Text style={styles.titleStyle}>{props.post.title.toUpperCase()}</Text>
-      </CardSection>
+class PostDetail extends Component {
+  onPressButton() {
+    return Actions.showPostDetail({ id: this.props.post.id });
+  }
 
-      <CardSection>
-        <Text>{props.post.body}</Text>
-      </CardSection>
+  render() {
+    return (
+      <Card>
+        <CardSection>
+          <Text style={styles.titleStyle}>{this.props.post.title.toUpperCase()}</Text>
+        </CardSection>
 
-      <CardSection>
-        <Button
-          onPress={() => console.log('Show Pressed')}
-          text={'Show'}
-        />
-      </CardSection>
-    </Card>
-  );
-};
+        <CardSection>
+          <Text>{this.props.post.body}</Text>
+        </CardSection>
+
+        <CardSection>
+          <Button
+            onPress={this.onPressButton.bind(this)}
+            text={'Show'}
+          />
+        </CardSection>
+      </Card>
+    );
+  }
+}
 
 const styles = {
   titleStyle: {
