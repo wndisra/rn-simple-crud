@@ -1,13 +1,9 @@
 import React from 'react';
-import { AppRegistry, View } from 'react-native';
-import Header from './src/components/Header';
-import PostList from './src/components/PostList';
+import { AppRegistry } from 'react-native';
+import Router from './src/Router';
 
 const App = () => (
-  <View style={{ flex: 1 }}>
-    <Header headerText={'Posts'} />
-    <PostList />
-  </View>
+  <Router />
 );
 
 AppRegistry.registerComponent('RNSimpleCRUD', () => App);
