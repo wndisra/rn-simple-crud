@@ -7,7 +7,8 @@ import showPostDetail from './components/ShowPostDetail';
 
 const RouterComponent = () => {
   return (
-    <Router sceneStyle={{ paddingTop: 75 }}>
+    <Router sceneStyle={{ paddingTop: 10 }}>
+      <Scene key="root">
       <Scene
         key="postList"
         component={PostList}
@@ -31,6 +32,7 @@ const RouterComponent = () => {
         component={showPostDetail}
         title={'Detail Post'}
       />
+      </Scene>
     </Router>
   );
 };
